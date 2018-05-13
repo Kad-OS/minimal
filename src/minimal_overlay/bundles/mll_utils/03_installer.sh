@@ -13,7 +13,7 @@ cd $WORK_DIR/overlay/$BUNDLE_NAME
 
 # 'mll-install' BEGIN
 
-# This script installs Minimal Linux Live on Ext2 partition.
+# This script installs KadOS on Ext2 partition.
 cat << CEOF > sbin/mll-install
 #!/bin/sh
 
@@ -29,7 +29,7 @@ fi
 if [ "\$PRINT_HELP" = "true" ] ; then
   cat << DEOF
 
-  This is the Minimal Linux Live installer. Requires root permissions.
+  This is the KadOS installer. Requires root permissions.
 
   Usage: mll-install DEVICE
 
@@ -40,7 +40,7 @@ if [ "\$PRINT_HELP" = "true" ] ; then
 
   mll-install sdb
 
-  The above example installs Minimal Linux Live  on '/dev/sdb'.
+  The above example installs KadOS  on '/dev/sdb'.
 
 DEOF
 
@@ -59,7 +59,7 @@ fi
 
 cat << DEOF
 
-  Minimal Linux Live will be installed on device '/dev/\$1'. The device will be
+  KadOS will be installed on device '/dev/\$1'. The device will be
   formatted with Ext2 and all previous data will be lost. Press 'Ctrl + C' to
   exit or any other key to continue.
 
@@ -125,6 +125,6 @@ cp /lib/i386-linux-gnu/libc.so.6 \
   $WORK_DIR/overlay/$BUNDLE_NAME/usr/lib
 # Big mama hack - end.
 
-echo "Minimal Linux Live installer has been generated."
+echo "KadOS installer has been generated."
 
 cd $SRC_DIR

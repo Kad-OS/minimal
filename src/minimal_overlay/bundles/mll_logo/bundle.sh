@@ -38,10 +38,6 @@ if [ ! -f $WORK_DIR/kernel/kernel_installed/kernel ] ; then
   exit 1
 fi
 
-rm -f `ls -d $WORK_DIR/kernel/linux-*`/drivers/video/logo/logo_linux_clut224.ppm
-cp $SRC_DIR/mll_logo_ascii_224.ppm `ls -d $WORK_DIR/kernel/linux-*`/drivers/video/logo/logo_linux_clut224.ppm
-touch `ls -d $WORK_DIR/kernel/linux-*`/drivers/video/logo/logo_linux_clut224.ppm
-
 cd `ls -d $WORK_DIR/kernel/linux-*`
 
 make bzImage -j 4

@@ -1,5 +1,5 @@
 # This is very simple Makefile which encapsulates the build
-# process of 'Minimal Linux Live'. Type the following command
+# process of 'KadOS'. Type the following command
 # for additional information:
 #
 # make help
@@ -9,7 +9,7 @@
 all: clean
 	@{ \
 		echo "Launching the main build script." ; \
-		/usr/bin/time -f "\n  Elapsed time: %E" ./build_minimal_linux_live.sh 2>&1 | tee minimal_linux_live.log ; \
+		/usr/bin/time -f "\n  Elapsed time: %E" ./build.sh 2>&1 | tee KadOS.log ; \
 		echo "" ; \
 	}
 
@@ -18,8 +18,8 @@ clean:
 		echo "Removing generated work artifacts." ; \
 		rm -rf work ; \
 		echo "Removing generated build artifacts." ; \
-		rm -f minimal_linux_live.iso ; \
-		rm -f mll_image.tgz ; \
+		rm -f KadOS.iso ; \
+		rm -f KadOS.tgz ; \
 		USE_PREDEFINED_KERNEL_CONFIG=`grep -i ^USE_PREDEFINED_KERNEL_CONFIG= .config | cut -f2- -d'=' | xargs` ; \
 		if [ ! "$$USE_PREDEFINED_KERNEL_CONFIG" = "true" ] ; then \
 			echo "Removing predefined Linux kernel config file." ; \
@@ -41,7 +41,7 @@ clean:
 		cd ../.. ; \
 		mv -f /tmp/mll_overlay_readme minimal_overlay/rootfs/README ; \
 		echo "Removing build log file." ; \
-		rm -f minimal_linux_live.log ; \
+		rm -f KadOS.log ; \
 		USE_LOCAL_SOURCE=`grep -i ^USE_LOCAL_SOURCE= .config | cut -f2- -d'=' | xargs` ; \
 		if [ ! "$$USE_LOCAL_SOURCE" = "true" ] ; then \
 			echo "Removing local source files." ; \
@@ -53,9 +53,9 @@ clean:
 
 qemu-bios:
 	@{ \
-		if [ ! -f ./minimal_linux_live.iso ] ; then \
+		if [ ! -f ./KadOS.iso ] ; then \
 			echo "" ; \
-			echo "  ERROR: ISO image 'minimal_linux_live.iso' not found." ; \
+			echo "  ERROR: ISO image 'KadOS.iso' not found." ; \
 			echo "" ; \
 			exit 1 ; \
 		fi ; \
@@ -65,9 +65,9 @@ qemu-bios:
 
 qemu-uefi:
 	@{ \
-		if [ ! -f ./minimal_linux_live.iso ] ; then \
+		if [ ! -f ./KadOS.iso ] ; then \
 			echo "" ; \
-			echo "  ERROR: ISO image 'minimal_linux_live.iso' not found." ; \
+			echo "  ERROR: ISO image 'KadOS.iso' not found." ; \
 			echo "" ; \
 			exit 1 ; \
 		fi ; \
@@ -78,12 +78,12 @@ qemu-uefi:
 src:
 	@{ \
 		echo "Generating source archive." ; \
-		rm -f minimal_linux_live_*_src.tar.xz ; \
+		rm -f KadOS_*_src.tar.xz ; \
 		cd minimal_overlay ; \
 		./overlay_build.sh mll_source 1>/dev/null ; \
 		cd .. ; \
 		cp work/overlay/mll_source/*.tar.xz . ; \
-		echo "Source archive is '`ls minimal_linux_live_*_src.tar.xz`'." ; \
+		echo "Source archive is '`ls KadOS_*_src.tar.xz`'." ; \
 	}
 
 release: src
@@ -92,12 +92,12 @@ release: src
 		rm -rf /tmp/mll_release ; \
 		mkdir -p /tmp/mll_release ; \
 		echo "Preparing MLL source tree." ; \
-		cp minimal_linux_live_*_src.tar.xz /tmp/mll_release ; \
+		cp KadOS_*_src.tar.xz /tmp/mll_release ; \
 		cd /tmp/mll_release ; \
-		tar -xf minimal_linux_live_*_src.tar.xz ; \
-		cd /tmp/mll_release/minimal_linux_live_*/ ; \
+		tar -xf KadOS_*_src.tar.xz ; \
+		cd /tmp/mll_release/KadOS_*/ ; \
 		echo "Launching the main build script." ; \
-		/usr/bin/time -f "\n  Elapsed time: %E" ./build_minimal_linux_live.sh 2>&1 | tee minimal_linux_live.log ; \
+		/usr/bin/time -f "\n  Elapsed time: %E" ./build.sh 2>&1 | tee KadOS.log ; \
 		echo "" ; \
 		echo "  Check the directory '/tmp/mll_release'." ; \
 		echo "" ; \
@@ -126,7 +126,7 @@ test:
 help:
 	@{ \
 		echo "" ; \
-		echo "  make all       - clean the workspace and then generate 'minimal_linux_live.iso'." ; \
+		echo "  make all       - clean the workspace and then generate 'KadOS.iso'." ; \
 		echo "" ; \
 		echo "  make clean     - remove all generated files." ; \
 		echo "" ; \
@@ -138,8 +138,8 @@ help:
 		echo "" ; \
 		echo "  make src       - generate 'tar.xz' source archive." ; \
 		echo "" ; \
-		echo "  make qemu-bios - run 'Minimal Linux Live' in QEMU with legacy BIOS compatibility." ; \
+		echo "  make qemu-bios - run 'KadOS' in QEMU with legacy BIOS compatibility." ; \
 		echo "" ; \
-		echo "  make qemu-uefi - run 'Minimal Linux Live' in QEMU with UEFI compatibility." ; \
+		echo "  make qemu-uefi - run 'KadOS' in QEMU with UEFI compatibility." ; \
 		echo "" ; \
 	}

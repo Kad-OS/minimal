@@ -15,6 +15,6 @@ fi
 cp -r $WORK_DIR/overlay/$BUNDLE_NAME/* \
   $OVERLAY_ROOTFS
 
-echo "All MLL utilities have been installed."
+echo "All KadOS utilities have been installed."
 
 cd $SRC_DIR
