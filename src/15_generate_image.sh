@@ -31,7 +31,7 @@ if [ -d $OVERLAY_ROOTFS ] && \
   # $WORK_DIR/kados will be overwritten correctly.
   cp -r --remove-destination $OVERLAY_ROOTFS/* \
     $WORK_DIR/kados
-  cp -r --remove-destination $SRC_DIR/minimal_overlay/rootfs/* \
+  cp -r --remove-destination $SRC_DIR/minimal_overlay/rootfs/ \
     $WORK_DIR/kados
 else
   echo "MLL image will have no overlay software."

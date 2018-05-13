@@ -18,8 +18,6 @@ mkdir -p $DEST_DIR/etc/autorun
 # Copy all source files to '/usr/src'.
 cp $MAIN_SRC_DIR/*.sh $DEST_DIR/usr/src
 cp $MAIN_SRC_DIR/.config $DEST_DIR/usr/src
-cp $MAIN_SRC_DIR/README $DEST_DIR/usr/src
-cp $MAIN_SRC_DIR/*.txt $DEST_DIR/usr/src
 
 # Copy all source directories to '/usr/src'.
 for MINIMAL_DIR in `ls -d $MAIN_SRC_DIR/minimal*/` ; do

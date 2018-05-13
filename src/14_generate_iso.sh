@@ -10,14 +10,14 @@ uefi() {
   cd $ISOIMAGE
 
   # Now we generate 'hybrid' ISO image file which can also be used on
-  # USB flash drive, e.g. 'dd if=minimal_linux_live.iso of=/dev/sdb'.
+  # USB flash drive, e.g. 'dd if=KadOS.iso of=/dev/sdb'.
   xorriso -as mkisofs \
     -isohybrid-mbr $WORK_DIR/syslinux/syslinux-*/bios/mbr/isohdpfx.bin \
     -c boot/boot.cat \
     -e boot/uefi.img \
       -no-emul-boot \
       -isohybrid-gpt-basdat \
-    -o $SRC_DIR/minimal_linux_live.iso \
+    -o $SRC_DIR/KadOS.iso \
     $ISOIMAGE
 }
 
@@ -26,7 +26,7 @@ bios() {
   cd $ISOIMAGE
 
   # Now we generate 'hybrid' ISO image file which can also be used on
-  # USB flash drive, e.g. 'dd if=minimal_linux_live.iso of=/dev/sdb'.
+  # USB flash drive, e.g. 'dd if=KadOS.iso of=/dev/sdb'.
   xorriso -as mkisofs \
     -isohybrid-mbr $WORK_DIR/syslinux/syslinux-*/bios/mbr/isohdpfx.bin \
     -c boot/syslinux/boot.cat \
@@ -34,7 +34,7 @@ bios() {
       -no-emul-boot \
       -boot-load-size 4 \
       -boot-info-table \
-    -o $SRC_DIR/minimal_linux_live.iso \
+    -o $SRC_DIR/KadOS.iso \
     $ISOIMAGE
 }
 
@@ -53,7 +53,7 @@ both() {
     -e boot/uefi.img \
       -no-emul-boot \
       -isohybrid-gpt-basdat \
-    -o $SRC_DIR/minimal_linux_live.iso \
+    -o $SRC_DIR/KadOS.iso \
   $ISOIMAGE
 }
 
@@ -91,11 +91,7 @@ cd $SRC_DIR
 
 cat << CEOF
 
-  #################################################################
-  #                                                               #
-  #  ISO image file 'minimal_linux_live.iso' has been generated.  #
-  #                                                               #
-  #################################################################
+*** 'KadOS.iso' has been generated. ***
 
 CEOF
 

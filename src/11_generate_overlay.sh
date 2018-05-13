@@ -90,7 +90,7 @@ elif [ "$OVERLAY_LOCATION" = "iso" ] && \
   # Copy the overlay content.
   cp -rf $OVERLAY_ROOTFS/* \
     $ISOIMAGE_OVERLAY/minimal/rootfs
-  cp -r $SRC_DIR/minimal_overlay/rootfs/* \
+  cp -r $SRC_DIR/minimal_overlay/rootfs/ \
     $ISOIMAGE_OVERLAY/minimal/rootfs
 else
   echo "The ISO image will have no overlay structure."
